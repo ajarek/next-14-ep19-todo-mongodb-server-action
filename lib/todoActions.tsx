@@ -1,12 +1,12 @@
-"use server";
-import { revalidatePath } from "next/cache";
+'use server'
+
+import { revalidatePath } from 'next/cache'
 import TodoModel from './todo-model'
 import dbConnect from './db-connect'
 import { z } from 'zod'
+import { redirect } from 'next/navigation'
 
 export async function create(formData: FormData) {
-  
-  
   const todoSchema = z.object({
     title: z.string(),
     completed: z.string(),
@@ -29,11 +29,10 @@ export async function create(formData: FormData) {
   } catch {
     return { message: 'Failed to create todo' }
   } finally {
-   
   }
 }
 
-export async function deleteProduct(formData: FormData) {
+export async function deleteTodo(formData: FormData) {
   const schema = z.object({
     _id: z.string().min(1),
     title: z.string().min(1),
@@ -47,41 +46,63 @@ export async function deleteProduct(formData: FormData) {
     await dbConnect()
     await TodoModel.findOneAndDelete({ _id: data._id })
     revalidatePath('/')
-    console.log({ message: `Deleted product ${data.title}` })
-    return { message: `Deleted product ${data.title}` }
+    console.log({ message: `Deleted Todo ${data.title}` })
+    return { message: `Deleted Todo ${data.title}` }
   } catch (e) {
-    return { message: 'Failed to delete product' }
+    return { message: 'Failed to delete Todo' }
   }
 }
 
-export const checkedTodo = async (formData: FormData ) => {
- 
-
-  const newProductData = {
+export const checkedTodo = async (formData: FormData) => {
+  const newTodoData = {
     _id: formData.get('_id'),
-    
-    
   }
-  
-  
+
   try {
     await dbConnect()
-    
-   const productId = await TodoModel.findById({ _id: newProductData._id })
 
-    if (!productId) throw new Error('product not found')
+    const TodoId = await TodoModel.findById({ _id: newTodoData._id })
 
-    console.log(newProductData.completed);
-    
-  const filter=await TodoModel.findOne(productId)
-    
-    await TodoModel.updateOne({ _id:productId },{completed:!filter.completed})
+    if (!TodoId) throw new Error('Todo not found')
+
+    console.log(newTodoData._id)
+
+    const filter = await TodoModel.findOne(TodoId)
+
+    await TodoModel.updateOne({ _id: TodoId }, { completed: !filter.completed })
     revalidatePath('/')
     return { success: true }
   } catch (err) {
     throw err
+  } finally {
   }
-  finally {
-   
+}
+
+export const updateTodo = async (formData: FormData) => {
+  const userSchema = z.object({
+    _id: z.string().min(1),
+    title: z.string(),
+  })
+
+  const newTodoData = userSchema.parse({
+    _id: formData.get('id'),
+    title: formData.get('input'),
+  })
+  console.log(newTodoData.title)
+
+  try {
+    await dbConnect()
+
+    let TodoId = await TodoModel.findById({ _id: newTodoData._id })
+
+    if (!TodoId) throw new Error('Todo not found')
+
+    await TodoModel.updateOne({ _id: TodoId }, newTodoData)
+    revalidatePath('/')
+    return { success: true }
+  } catch (err) {
+    throw err
+  } finally {
+    redirect('/')
   }
 }
