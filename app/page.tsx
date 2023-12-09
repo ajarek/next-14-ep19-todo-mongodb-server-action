@@ -14,20 +14,35 @@ export default async function Home() {
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-start p-24'>
+       <span className="text-3xl font-extrabold uppercase">
+        To-do-app
+      </span>
+      <h1 className=" text-3xl font-extrabold uppercase mb-5">
+        Next.js 14
+        <span className="text-violet-500 ml-2">
+          Server Actions
+        </span>
+      </h1>
+      <div className="flex justify-center flex-col items-center w-[1000px] gap-4 ">
       <AddTodo/>
       {toDos.map((todo) => {
         return (
-          <div className=' flex items-center py-4' key={todo._id}>
+          <div className='w-full flex items-center justify-between  p-2 border border-violet-500 rounded-lg' key={todo._id}>
+            <div className='flex items-center'>
             <CheckedTodo  _id={todo._id.toString()}  label={todo.completed?'☑️':'🟪'}/>
             <p className='mx-4' style={todo.completed?{ textDecoration: 'line-through'}:{}}>{todo.title}</p>
-            <Link className='text-2xl ' href={`/update/${todo._id}`}>🖊️</Link>
+            </div>
+            <div className='flex items-center'>
+            <Link className='text-2xl mr-4' href={`/update/${todo._id}`}>🖊️</Link>
             <DeleteTodo
                   _id={todo._id.toString()}
                   title={todo.title}
                 />
+                </div>
           </div>
         )
       })}
+      </div>
     </main>
   )
 }

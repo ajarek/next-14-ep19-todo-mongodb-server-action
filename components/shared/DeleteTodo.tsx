@@ -1,6 +1,6 @@
 'use client'
 
-import { deleteProduct } from '@/lib/todoActions'
+import { deleteTodo } from '@/lib/todoActions'
 
 export default function DeleteTodo({
   _id,
@@ -12,7 +12,7 @@ export default function DeleteTodo({
   return (
     <form
       action={async (formData) => {
-        const res = await deleteProduct(formData)
+        const res = await deleteTodo(formData)
         console.log(res.message)
       }}
     >

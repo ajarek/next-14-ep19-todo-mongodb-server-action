@@ -9,12 +9,12 @@ import { redirect } from 'next/navigation'
 export async function create(formData: FormData) {
   const todoSchema = z.object({
     title: z.string(),
-    completed: z.string(),
+    completed: z.boolean(),
   })
 
   const todoData = todoSchema.parse({
     title: formData.get('input'),
-    completed: formData.get('completed'),
+    completed: false
   })
   if (!todoData) {
     return { message: 'Form data is not valid' }
@@ -29,6 +29,7 @@ export async function create(formData: FormData) {
   } catch {
     return { message: 'Failed to create todo' }
   } finally {
+    
   }
 }
 
@@ -82,11 +83,13 @@ export const updateTodo = async (formData: FormData) => {
   const userSchema = z.object({
     _id: z.string().min(1),
     title: z.string(),
+    completed: z.boolean(),
   })
 
   const newTodoData = userSchema.parse({
     _id: formData.get('id'),
     title: formData.get('input'),
+    completed: false,
   })
   console.log(newTodoData.title)
 
