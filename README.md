@@ -1,6 +1,7 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-<img width="597" alt="Zrzut ekranu 2023-12-10 212143" src="https://github.com/ajarek/next-14-ep19-todo-mongodb-server-action/assets/61388692/d2ef202b-c2d1-4019-adc5-2549b630c083">
+<img width="400" alt="Zrzut ekranu 2023-12-10 212159" src="https://github.com/ajarek/next-14-ep19-todo-mongodb-server-action/assets/61388692/32201e6f-743a-4ed2-a3ae-c91f34e6228d">
+
 
 <img width="180" alt="Zrzut ekranu 2023-12-10 211738" src="https://github.com/ajarek/next-14-ep19-todo-mongodb-server-action/assets/61388692/ada6dd58-c96a-405f-a51e-44e1b73df639">
 
