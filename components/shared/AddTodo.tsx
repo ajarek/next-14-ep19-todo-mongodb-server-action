@@ -18,7 +18,12 @@ const AddTodo = () => {
           type='text'
           placeholder='Add Todo...'
         />
-        <Button type='submit' size={'lg'}>Add</Button>
+        <Button
+          type='submit'
+          size={'lg'}
+        >
+          Add
+        </Button>
       </div>
     </form>
   )

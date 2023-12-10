@@ -13,7 +13,6 @@ export default function DeleteTodo({
     <form
       action={async (formData) => {
         const res = await deleteTodo(formData)
-        console.log(res.message)
       }}
     >
       <input

@@ -14,7 +14,7 @@ export async function create(formData: FormData) {
 
   const todoData = todoSchema.parse({
     title: formData.get('input'),
-    completed: false
+    completed: false,
   })
   if (!todoData) {
     return { message: 'Form data is not valid' }
@@ -29,7 +29,6 @@ export async function create(formData: FormData) {
   } catch {
     return { message: 'Failed to create todo' }
   } finally {
-    
   }
 }
 

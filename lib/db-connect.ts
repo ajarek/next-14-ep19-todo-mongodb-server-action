@@ -2,11 +2,11 @@ import mongoose from 'mongoose'
 
 export default async function dbConnect() {
   try {
-    const uri = process.env.MONGO_URI;
+    const uri = process.env.MONGO_URI
     if (uri) {
-      await mongoose.connect(uri);
+      await mongoose.connect(uri)
     } else {
-      throw new Error('MONGO_URI is not set');
+      throw new Error('MONGO_URI is not set')
     }
   } catch (error) {
     throw new Error('Connection failed!')

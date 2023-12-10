@@ -1,22 +1,20 @@
 'use client'
 
 import { checkedTodo } from '@/lib/todoActions'
-import { Checkbox } from '../ui/checkbox'
 
 export default function CheckedTodo({
   _id,
-  
-  label
+
+  label,
 }: {
   _id: string
-  
-  label:string
+
+  label: string
 }) {
   return (
     <form
       action={async (formData) => {
         const res = await checkedTodo(formData)
-        
       }}
     >
       <input
@@ -24,12 +22,12 @@ export default function CheckedTodo({
         name='_id'
         value={_id}
       />
-      
+
       <button
         type='submit'
         className='max-lg:text-xl text-2xl btn btn-ghost'
       >
-       {label}
+        {label}
       </button>
     </form>
   )
